@@ -26,7 +26,7 @@ function(res11,designX,Ys,batchCL,ngrps,grps,Conf,nt,cGsub,comres,theme,type){
   filname4=paste0(getwd(),"/correctBATCH/",Sys.Date(),"_pca_After_PPCCA_correction.txt")
   write.table(tdat5,filname4,quote=TRUE,sep="\t",row.names=TRUE)
   if(nt==1){
-    fig6<-ggplot(data= sdat5, aes(x, y,colour=cGsub[batchCL])) +
+    fig6<-ggplot(data= sdat5, aes(x, y,colour=factor(cGsub[batchCL]))) +
       geom_point(size=5.5,alpha=.7)+
       scale_shape_manual(guide=guide_legend(override.aes=aes(size=5)))+
       labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+
@@ -36,7 +36,7 @@ function(res11,designX,Ys,batchCL,ngrps,grps,Conf,nt,cGsub,comres,theme,type){
     if(nt>8){
       z=(Conf-min(Conf))/(max(Conf)-min(Conf))
       z=((z+.15)*10)
-      fig6<-ggplot(data= sdat5, aes(x, y,colour=cGsub[batchCL])) +
+      fig6<-ggplot(data= sdat5, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(size=z,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=z)))+
         labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+
@@ -46,7 +46,7 @@ function(res11,designX,Ys,batchCL,ngrps,grps,Conf,nt,cGsub,comres,theme,type){
       pch=c(15:22)
       fch=pch[1:nt]
       lb=paste0('bio-',type)
-      fig6<-ggplot(data= sdat5, aes(x, y,colour=cGsub[batchCL])) +
+      fig6<-ggplot(data= sdat5, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(aes(shape=factor(fch[Conf],labels=lb)),size=5.5,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=5)))+
         labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+

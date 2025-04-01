@@ -13,7 +13,7 @@ function(Ys,batchCL,grps,cGsub,Conf,theme,type){
   rownames(tdat6)<-rownames(Ys)
   write.table(tdat6,paste0("correctComBat/",Sys.Date(),"pca_After_Combat_Correction.txt"),quote=TRUE,sep="\t",row.names=TRUE)
   if(length(type)==1){
-    fig7<-ggplot(data= sdat6, aes(x, y,colour=cGsub[batchCL])) +
+    fig7<-ggplot(data= sdat6, aes(x, y,colour=factor(cGsub[batchCL]))) +
       geom_point(size=5.5,alpha=.7)+
       scale_shape_manual(guide=guide_legend(override.aes=aes(size=5)))+
       labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+
@@ -23,7 +23,7 @@ function(Ys,batchCL,grps,cGsub,Conf,theme,type){
     if(length(type)>8){
       z=(Conf-min(Conf))/(max(Conf)-min(Conf))
       z=((z+.15)*10)
-      fig7<-ggplot(data= sdat6, aes(x, y,colour=cGsub[batchCL])) +
+      fig7<-ggplot(data= sdat6, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(size=z,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=z)))+
         labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+
@@ -33,7 +33,7 @@ function(Ys,batchCL,grps,cGsub,Conf,theme,type){
       pch=c(15:22)
       fch=pch[1:length(type)]
       lb=paste0('bio-',type)
-      fig7<-ggplot(data= sdat6, aes(x, y,colour=cGsub[batchCL])) +
+      fig7<-ggplot(data= sdat6, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(aes(shape=factor(fch[Conf],labels=lb)),size=5.5,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=5)))+
         labs(title="",x="PC-1",y="PC-2") +theme_bw()+theme+

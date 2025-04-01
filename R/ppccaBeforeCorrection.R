@@ -19,7 +19,7 @@ function(res1,grps,cGsub,batchCL,Conf,type,Ys,theme){
   rownames(tdat2)<-rownames(Ys) 
 write.table(tdat2,paste0("ppccaBeforeCorrection/",Sys.Date(),"ppccaBeforeCorrection.txt"),quote=TRUE,sep="\t",row.names=TRUE)
   if(length(type)==1){
-    fig3<-ggplot(data= sdat2, aes(x, y,colour=cGsub[batchCL])) +
+    fig3<-ggplot(data= sdat2, aes(x, y,colour=factor(cGsub[batchCL]))) +
       geom_point(size=5.5,alpha=.7)+
       scale_shape_manual(guide=guide_legend(override.aes=aes(size=5)))+
       labs(title="",x="pPC-1",y="pPC-2") +theme_bw()+theme+
@@ -29,7 +29,7 @@ write.table(tdat2,paste0("ppccaBeforeCorrection/",Sys.Date(),"ppccaBeforeCorrect
     if(length(type)>8){
       z=(Conf-min(Conf))/(max(Conf)-min(Conf))
       z=((z+.15)*10)
-      fig3<-ggplot(data= sdat2, aes(x, y,colour=cGsub[batchCL])) +
+      fig3<-ggplot(data= sdat2, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(size=z,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=z)))+
         labs(title="",x="pPC-1",y="pPC-2") +theme_bw()+theme+
@@ -39,7 +39,7 @@ write.table(tdat2,paste0("ppccaBeforeCorrection/",Sys.Date(),"ppccaBeforeCorrect
       pch=c(15:22)
       fch=pch[1:length(type)]
       lb=paste0('bio-',type)
-      fig3<-ggplot(data= sdat2, aes(x, y,colour=cGsub[batchCL])) +
+      fig3<-ggplot(data= sdat2, aes(x, y,colour=factor(cGsub[batchCL]))) +
         geom_point(aes(shape=factor(fch[Conf],labels=lb)),size=5.5,alpha=.7)+
         scale_shape_manual(values=fch,guide=guide_legend(override.aes=aes(size=5)))+
         labs(title="",x="pPC-1",y="pPC-2") +theme_bw()+theme+
@@ -53,7 +53,7 @@ write.table(tdat2,paste0("ppccaBeforeCorrection/",Sys.Date(),"ppccaBeforeCorrect
   colnames(pdat)<-paste0("pPC-",1:res1$q)
   write.table(pdat,paste0("ppccaBeforeCorrection/",Sys.Date(),"_pairsppccaBeforeCorrection.txt"),quote=TRUE,sep="\t",row.names=TRUE)
   pdf(file="ppccaBeforeCorrection/pairsplotppccaBeforeCorrection.pdf",onefile=TRUE)
-  pairs(pdat[,1:res1$q],col= cGsub[batchCL],pch=15)
+  pairs(pdat[,1:res1$q],col= factor(cGsub[batchCL]),pch=15)
   dev.off()
   rm(pdat,fig3,sdat2,tdat2,fig2,bicp,bic)
   gc()
