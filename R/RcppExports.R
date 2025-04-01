@@ -2,22 +2,22 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 rcpparma_hello_world <- function() {
-    .Call('exploBATCH_rcpparma_hello_world', PACKAGE = 'exploBATCH')
+    .Call('_exploBATCH_rcpparma_hello_world', PACKAGE = 'exploBATCH')
 }
 
 rcpparma_outerproduct <- function(x) {
-    .Call('exploBATCH_rcpparma_outerproduct', PACKAGE = 'exploBATCH', x)
+    .Call('_exploBATCH_rcpparma_outerproduct', PACKAGE = 'exploBATCH', x)
 }
 
 rcpparma_innerproduct <- function(x) {
-    .Call('exploBATCH_rcpparma_innerproduct', PACKAGE = 'exploBATCH', x)
+    .Call('_exploBATCH_rcpparma_innerproduct', PACKAGE = 'exploBATCH', x)
 }
 
 rcpparma_bothproducts <- function(x) {
-    .Call('exploBATCH_rcpparma_bothproducts', PACKAGE = 'exploBATCH', x)
+    .Call('_exploBATCH_rcpparma_bothproducts', PACKAGE = 'exploBATCH', x)
 }
 
 fM <- function(A, B) {
-    .Call('exploBATCH_fM', PACKAGE = 'exploBATCH', A, B)
+    .Call('_exploBATCH_fM', PACKAGE = 'exploBATCH', A, B)
 }
 

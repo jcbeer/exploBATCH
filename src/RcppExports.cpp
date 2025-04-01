@@ -7,9 +7,14 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // rcpparma_hello_world
 arma::mat rcpparma_hello_world();
-RcppExport SEXP exploBATCH_rcpparma_hello_world() {
+RcppExport SEXP _exploBATCH_rcpparma_hello_world() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -19,7 +24,7 @@ END_RCPP
 }
 // rcpparma_outerproduct
 arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP exploBATCH_rcpparma_outerproduct(SEXP xSEXP) {
+RcppExport SEXP _exploBATCH_rcpparma_outerproduct(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +35,7 @@ END_RCPP
 }
 // rcpparma_innerproduct
 double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP exploBATCH_rcpparma_innerproduct(SEXP xSEXP) {
+RcppExport SEXP _exploBATCH_rcpparma_innerproduct(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,7 +46,7 @@ END_RCPP
 }
 // rcpparma_bothproducts
 Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP exploBATCH_rcpparma_bothproducts(SEXP xSEXP) {
+RcppExport SEXP _exploBATCH_rcpparma_bothproducts(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,7 +57,7 @@ END_RCPP
 }
 // fM
 SEXP fM(const Eigen::Map<Eigen::MatrixXd> A, Eigen::Map<Eigen::MatrixXd> B);
-RcppExport SEXP exploBATCH_fM(SEXP ASEXP, SEXP BSEXP) {
+RcppExport SEXP _exploBATCH_fM(SEXP ASEXP, SEXP BSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -61,4 +66,18 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(fM(A, B));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_exploBATCH_rcpparma_hello_world", (DL_FUNC) &_exploBATCH_rcpparma_hello_world, 0},
+    {"_exploBATCH_rcpparma_outerproduct", (DL_FUNC) &_exploBATCH_rcpparma_outerproduct, 1},
+    {"_exploBATCH_rcpparma_innerproduct", (DL_FUNC) &_exploBATCH_rcpparma_innerproduct, 1},
+    {"_exploBATCH_rcpparma_bothproducts", (DL_FUNC) &_exploBATCH_rcpparma_bothproducts, 1},
+    {"_exploBATCH_fM", (DL_FUNC) &_exploBATCH_fM, 2},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_exploBATCH(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
